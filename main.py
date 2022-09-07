@@ -22,7 +22,7 @@ del quant_FCFS
 quant_SSTF = 0
 
 requi_SSTF = requisicoes.copy()
-head = requi_SSTF[0]
+head = requi_SSTF[0] # Posição da cabeça de leitura
 
 for i in range(len(requisicoes)-1):
 	candidatos = [abs(head-x) for x in requi_SSTF if x != head] # Calcula lista das distâncias do cilindro onde a
@@ -38,5 +38,22 @@ for i in range(len(requisicoes)-1):
 print("SSTF", quant_SSTF)
 del quant_SSTF, requi_SSTF, head
 
-print("ELEVADOR", 299)
-del entrada, ult_cilindro, requisicoes
+requi_ELEVADOR = requisicoes.copy()
+head = requi_ELEVADOR[0] # Posição da cabeça de leitura
+
+requi_ELEVADOR.sort()
+
+ind_head = requi_ELEVADOR.index(head)
+
+dist_esq = requi_ELEVADOR[ind_head] - requi_ELEVADOR[ind_head-1]
+dist_dir = requi_ELEVADOR[ind_head+1] - requi_ELEVADOR[ind_head]
+
+ind = 0 # Por padrão vai para a esquerda
+if dist_dir < dist_esq: # Se a distância da cabeça de leitura para o cilindro da direita for menor
+	ind = -1			# do que a distância para o cilindro da esquerda
+
+quant_ELEVADOR = abs(head-requi_ELEVADOR[ind]) + requi_ELEVADOR[-1]-requi_ELEVADOR[0]
+
+print("ELEVADOR", quant_ELEVADOR)
+del entrada, ult_cilindro, requisicoes, requi_ELEVADOR, head, ind_head
+del dist_esq, dist_dir, ind, quant_ELEVADOR
