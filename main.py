@@ -43,17 +43,7 @@ head = requi_ELEVADOR[0] # Posição da cabeça de leitura
 
 requi_ELEVADOR.sort()
 
-ind_head = requi_ELEVADOR.index(head)
-
-dist_esq = requi_ELEVADOR[ind_head] - requi_ELEVADOR[ind_head-1]
-dist_dir = requi_ELEVADOR[ind_head+1] - requi_ELEVADOR[ind_head]
-
-ind = 0 # Por padrão vai para a esquerda
-if dist_dir < dist_esq: # Se a distância da cabeça de leitura para o cilindro da direita for menor
-	ind = -1			# do que a distância para o cilindro da esquerda
-
-quant_ELEVADOR = abs(head-requi_ELEVADOR[ind]) + requi_ELEVADOR[-1]-requi_ELEVADOR[0]
-
+quant_ELEVADOR = abs(head-requi_ELEVADOR[-1]) + requi_ELEVADOR[-1]-requi_ELEVADOR[0] # Cálculo da movimentação total
+																					 # da cabeça de leitura
 print("ELEVADOR", quant_ELEVADOR)
-del entrada, ult_cilindro, requisicoes, requi_ELEVADOR, head, ind_head
-del dist_esq, dist_dir, ind, quant_ELEVADOR
+del entrada, ult_cilindro, requisicoes, requi_ELEVADOR, head, quant_ELEVADOR
